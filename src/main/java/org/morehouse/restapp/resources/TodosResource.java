@@ -94,8 +94,12 @@ public class TodosResource {
 
 		Optional<Todo> todoOptional = todoRepository.findById(id);
 
-		if (!todoOptional.isPresent())
+		if (!todoOptional.isPresent()) {
 			return ResponseEntity.notFound().build();
+		}
+		if (!validateUpdate(todoOptional.get(), todo)) {
+			return ResponseEntity.badRequest().build();
+		}
 
 		todo.setId(id);
 		
@@ -103,4 +107,15 @@ public class TodosResource {
 
 		return ResponseEntity.noContent().build();
 	}
+	
+	boolean validateUpdate(Todo existing, Todo update) {
+		if (existing.getAssignee() == null && update.getAssignee() == null) {
+			return true;
+		}
+		else {
+			return update.getAssignee() != null;
+			}
+	}
+	
+	
 }
