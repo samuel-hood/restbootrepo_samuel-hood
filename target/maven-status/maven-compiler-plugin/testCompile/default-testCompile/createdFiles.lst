@@ -1,2 +1,3 @@
 org/morehouse/restapp/JUnitTestTodos.class
+org/morehouse/restapp/resources/UpdateTodoTest.class
 org/morehouse/restapp/RestappApplicationTests.class
